@@ -4,7 +4,7 @@ Welcome to Introduction to C++ for DSA repository. Here, you'll find detailed ex
 
 ### Module - 01
 
-- [Basic C++][https://github.com/hasnat-shahriyar/CPP/tree/main/Module-01]
+- (Basic C++)[https://github.com/hasnat-shahriyar/CPP/tree/main/Module-01]
 
 #
 
