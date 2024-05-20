@@ -97,3 +97,135 @@ In this example:
 ### Conclusion
 
 The ternary operator is a powerful tool for writing concise conditional assignments in C++. Use it judiciously to maintain code clarity and simplicity.
+
+#
+
+# String in C++
+
+Strings in C++ are a fundamental part of the language and are used to store and manipulate text. There are two main ways to handle strings in C++: using C-style strings (arrays of characters) and using the `std::string` class from the C++ Standard Library.
+
+### C-style Strings
+
+C-style strings are arrays of characters ending with a null character (`'\0'`). Here's an example of how to work with C-style strings:
+
+```cpp
+#include <iostream>
+#include <cstring>
+
+int main() {
+    // Declare a C-style string
+    char str1[20] = "Hello";
+
+    // Output the string
+    std::cout << str1 << std::endl;
+
+    // Copying strings
+    char str2[20];
+    std::strcpy(str2, str1);
+    std::cout << "Copied string: " << str2 << std::endl;
+
+    // Concatenating strings
+    std::strcat(str1, " World!");
+    std::cout << "Concatenated string: " << str1 << std::endl;
+
+    // Comparing strings
+    if (std::strcmp(str1, str2) == 0) {
+        std::cout << "Strings are equal" << std::endl;
+    } else {
+        std::cout << "Strings are not equal" << std::endl;
+    }
+
+    return 0;
+}
+```
+
+### `std::string`
+
+The `std::string` class in the C++ Standard Library provides a more convenient and safer way to handle strings. Here's how you can use it:
+
+```cpp
+#include <iostream>
+#include <string>
+
+int main() {
+    // Declare a string
+    std::string str1 = "Hello";
+
+    // Output the string
+    std::cout << str1 << std::endl;
+
+    // Copying strings
+    std::string str2 = str1;
+    std::cout << "Copied string: " << str2 << std::endl;
+
+    // Concatenating strings
+    str1 += " World!";
+    std::cout << "Concatenated string: " << str1 << std::endl;
+
+    // Comparing strings
+    if (str1 == str2) {
+        std::cout << "Strings are equal" << std::endl;
+    } else {
+        std::cout << "Strings are not equal" << std::endl;
+    }
+
+    // Finding a substring
+    size_t pos = str1.find("World");
+    if (pos != std::string::npos) {
+        std::cout << "'World' found at position: " << pos << std::endl;
+    } else {
+        std::cout << "'World' not found" << std::endl;
+    }
+
+    // Getting a substring
+    std::string sub = str1.substr(6, 5); // "World"
+    std::cout << "Substring: " << sub << std::endl;
+
+    return 0;
+}
+```
+
+### Key Functions and Methods
+
+For `std::string`, here are some commonly used methods:
+
+- **Length**: `size()` or `length()`
+  ```cpp
+  std::string str = "Hello";
+  std::cout << "Length: " << str.size() << std::endl;
+  ```
+- **Append**: `+=` or `append()`
+  ```cpp
+  std::string str = "Hello";
+  str += " World";
+  str.append("!");
+  std::cout << str << std::endl; // Output: Hello World!
+  ```
+- **Compare**: `==`, `!=`, `<`, `<=`, `>`, `>=`
+  ```cpp
+  std::string str1 = "Hello";
+  std::string str2 = "World";
+  if (str1 != str2) {
+      std::cout << "Strings are not equal" << std::endl;
+  }
+  ```
+- **Find**: `find()`
+  ```cpp
+  std::string str = "Hello World";
+  size_t pos = str.find("World");
+  if (pos != std::string::npos) {
+      std::cout << "'World' found at position: " << pos << std::endl;
+  }
+  ```
+- **Substring**: `substr()`
+  ```cpp
+  std::string str = "Hello World";
+  std::string sub = str.substr(6, 5);
+  std::cout << "Substring: " << sub << std::endl; // Output: World
+  ```
+
+### Conclusion
+
+`std::string` is preferred for most applications due to its ease of use and safety. However, understanding C-style strings is essential when interfacing with legacy code or certain low-level operations.
+
+Feel free to experiment with these examples to get a better understanding of how strings work in C++.
