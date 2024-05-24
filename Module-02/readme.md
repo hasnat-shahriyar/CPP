@@ -368,3 +368,142 @@ Stack      Heap
 - Static memory (stack) is used for storing pointers (`a` and `p`).
 - Dynamic memory (heap) is used for storing integer values (`10` and `100`) pointed to by `a` and `p`.
 - The `delete` operator deallocates the dynamically allocated memory from the heap.
+
+# Creating Dynamic Array and Return Array from Function
+
+```c
+#include <iostream>
+using namespace std;
+
+int * fun()
+{
+    // Dynamically allocate an array of size 5
+    int *a = new int[5];
+
+    // Input values into the array
+    for (int i = 0; i < 5; i++)
+    {
+        cin >> a[i];
+    }
+    return a;
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+
+    // Dynamically allocate an array of size 'n'
+    int *arr = new int[n];
+
+    // Input values into the array
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr[i];
+    }
+
+    // Output values from the array (values of arr[])
+    cout << "Output values from the array (values of arr[]):" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i] << endl;
+    }
+
+    // Call the 'fun' function to get a dynamically allocated array
+    int *p = fun();
+
+    // Output values from the dynamically allocated array (values of p[])
+    cout << "Output values from the dynamically allocated array (values of p[]):" << endl;
+    for (int i = 0; i < 5; i++)
+    {
+        cout << p[i] << " ";
+    }
+
+    // Deallocate the dynamically allocated memory to prevent memory leaks
+    delete[] arr;
+    delete[] p;
+
+    return 0;
+}
+```
+
+Let's dissect the code and visualize how dynamic memory allocation works in this context.
+
+### Code Explanation:
+
+1. **Function `fun()`**:
+
+   - Dynamically allocates an array of integers of size 5.
+   - Inputs values into the array.
+   - Returns a pointer to the dynamically allocated array.
+
+2. **`main()` Function**:
+   - Dynamically allocates an array of integers of size `n`.
+   - Inputs values into the array based on user input.
+   - Outputs the values stored in the array `arr`.
+   - Calls the `fun()` function to obtain a dynamically allocated array.
+   - Outputs the values stored in the array obtained from the `fun()` function.
+   - Deallocates the dynamically allocated memory for both arrays to prevent memory leaks.
+
+### Memory Representation:
+
+1. **Dynamic Memory (Heap)**:
+   - The heap contains dynamically allocated memory for both arrays.
+
+```
+Heap
+|______|      |______|
+|  arr |      |   p  |
+|______|      |______|
+```
+
+### Visualization Steps:
+
+1. **Memory Allocation in `main()`**:
+   - `int *arr = new int[n];`
+
+```
+Heap
+|______|      |______|
+|  arr |      |   p  |
+|______|      |______|
+```
+
+2. **Memory Allocation and Input in `fun()`**:
+   - `int *p = fun();`
+
+```
+Heap
+|______|      |______|
+|  arr |      |   p  |
+|______|      |______|
+            |  1   |
+            |  2   |
+            |  3   |
+            |  4   |
+            |  5   |
+```
+
+3. **Output from `main()`**:
+
+   - Outputs the values stored in the array `arr`.
+
+4. **Output from `fun()`**:
+
+   - Outputs the values stored in the array `p`.
+
+5. **Memory Deallocation**:
+   - `delete[] arr;`
+   - `delete[] p;`
+
+```
+Heap
+|______|
+```
+
+### Summary:
+
+- Dynamic memory (heap) is used for storing dynamically allocated arrays (`arr` and `p`).
+- The `delete[]` operator deallocates the dynamically allocated memory from the heap to prevent memory leaks.
+- Both arrays are allocated dynamically, allowing for flexibility in array sizes.
+- Input and output operations are performed on the arrays, demonstrating their usage in a practical scenario.
