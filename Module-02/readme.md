@@ -237,3 +237,134 @@ In this example:
 - `dynamicArray` is allocated dynamically with a size specified by the user at runtime.
 
 Understanding these differences helps in choosing the appropriate memory allocation strategy based on the requirements of your program.
+
+# Create Dynamic Memory
+
+```c
+#include <bits/stdc++.h>
+using namespace std;
+
+// Function that allocates memory for an integer, assigns it a value, and returns the pointer
+int * fun()
+{
+    int * x = new int;  // Dynamically allocate memory for an integer
+    *x = 100;           // Assign the value 100 to the allocated memory
+    return x;           // Return the pointer to the allocated memory
+}
+
+int main()
+{
+    // Dynamically allocate memory for an integer and assign it a value
+    int *a = new int;
+    *a = 10;
+
+    // Print the memory address stored in pointer 'a'
+    cout << "Memory address stored in pointer 'a': " << a << endl;
+
+    // Print the value stored at the memory address pointed to by 'a'
+    cout << "Value stored at the memory address pointed to by 'a': " << *a << endl;
+
+    // Call the function fun and get the returned pointer
+    int *p = fun();
+
+    // Print the memory address stored in pointer 'p'
+    cout << "Memory address stored in pointer 'p': " << p << endl;
+
+    // Print the value stored at the memory address pointed to by 'p'
+    cout << "Value stored at the memory address pointed to by 'p': " << *p << endl;
+
+    // Free the allocated memory
+    delete a;
+    delete p;
+
+    return 0;
+}
+```
+
+Let's break down the code and visualize the memory allocation in the stack and heap:
+
+### Code Explanation:
+
+1. **Function `fun()`**:
+
+   - Dynamically allocates memory for an integer.
+   - Assigns the value `100` to the allocated memory.
+   - Returns the pointer to the allocated memory.
+
+2. **`main()` Function**:
+   - Dynamically allocates memory for an integer (`a`) and assigns the value `10` to it.
+   - Calls the `fun()` function, which also dynamically allocates memory for an integer and assigns the value `100` to it.
+   - Prints the memory addresses and values stored in the pointers `a` and `p`.
+   - Deallocates the dynamically allocated memory for `a` and `p`.
+
+### Memory Representation:
+
+1. **Static Memory (Stack)**:
+   - The stack contains memory for local variables and function calls.
+   - In this example, memory for the pointer `a` is allocated on the stack.
+
+```
+Stack
+|  a   |
+|______|
+```
+
+2. **Dynamic Memory (Heap)**:
+   - The heap contains dynamically allocated memory.
+   - Memory for the integer pointed to by `a` and the integer allocated in the `fun()` function is allocated on the heap.
+
+```
+Heap
+|______|      |______|
+|  10  |      |  100  |
+|______|      |______|
+   a            p
+```
+
+### Visualization Steps:
+
+1. **Memory Allocation for `a` in `main()`**:
+   - `int *a = new int;`
+
+```
+Stack      Heap
+|  a   |   |______|
+|______|   |  10  |
+           |______|
+```
+
+2. **Memory Allocation in `fun()`**:
+   - `int *p = fun();`
+
+```
+Stack      Heap
+|  a   |   |______|
+|  p   |   |  10  |
+|______|   |______|
+```
+
+3. **After `fun()` Execution**:
+   - `*p = 100;`
+
+```
+Stack      Heap
+|  a   |   |______|
+|  p   |   |  100 |
+|______|   |______|
+```
+
+4. **Memory Deallocation**:
+   - `delete a;`
+   - `delete p;`
+
+```
+Stack      Heap
+|  a   |   |______|
+|______|   |______|
+```
+
+### Summary:
+
+- Static memory (stack) is used for storing pointers (`a` and `p`).
+- Dynamic memory (heap) is used for storing integer values (`10` and `100`) pointed to by `a` and `p`.
+- The `delete` operator deallocates the dynamically allocated memory from the heap.
