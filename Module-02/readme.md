@@ -507,3 +507,5 @@ Heap
 - The `delete[]` operator deallocates the dynamically allocated memory from the heap to prevent memory leaks.
 - Both arrays are allocated dynamically, allowing for flexibility in array sizes.
 - Input and output operations are performed on the arrays, demonstrating their usage in a practical scenario.
+
+# Increase Size of Array and Delete Dynamic Memory
