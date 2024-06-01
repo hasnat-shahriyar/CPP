@@ -314,6 +314,8 @@ Output : Name: John Doe, Age: 20, Height: 5.9 feet
 
 By using the `this` keyword, the code explicitly shows that the member variables of the `mim` object are being set to the values provided by the user through the constructor parameters.
 
+##
+
 # Return Object from Function
 
 Returning an object from a function in C++ involves creating an object within the function and then returning it to the caller. Here's the explanation using your provided code:
@@ -413,3 +415,126 @@ Roll: 101; Class: 10; GPA: 3.8
 ```
 
 This demonstrates how an object is created within a function, initialized, and then returned to the caller for further use.
+
+##
+
+# Create Dynamic Object
+
+Creating dynamic objects in C++ involves allocating memory for objects at runtime using the `new` keyword, and deallocating memory using the `delete` keyword. Here's the modified version of your code to illustrate dynamic object creation:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Student
+{
+public:
+    int roll;
+    int cls;
+    double gpa;
+
+    Student(int roll, int cls, double gpa)
+    {
+        this->roll = roll;
+        this->cls = cls;
+        this->gpa = gpa;
+    }
+
+    ~Student() // Destructor to release memory
+    {
+        cout << "Destructor called for roll number " << roll << endl;
+    }
+};
+
+Student* createDynamicStudent()
+{
+    int roll;
+    int cls;
+    double gpa;
+
+    // Getting input for student attributes
+    cout << "Enter Roll: ";
+    cin >> roll;
+    cout << "Enter Class: ";
+    cin >> cls;
+    cout << "Enter GPA: ";
+    cin >> gpa;
+
+    // Creating a dynamic Student object
+    Student* bio = new Student(roll, cls, gpa);
+
+    return bio;
+}
+
+int main()
+{
+    // Creating a dynamic Student object
+    Student* output = createDynamicStudent();
+
+    // Printing the attributes of the dynamic Student object
+    cout << "Roll: " << output->roll << "; Class: " << output->cls << "; GPA: " << output->gpa << endl;
+
+    // Freeing dynamically allocated memory
+    delete output;
+
+    return 0;
+}
+```
+
+### Explanation
+
+1. **Class Definition (Student)**:
+
+   - Defines a class named `Student` with public member variables `roll`, `cls`, and `gpa`.
+
+2. **Constructor**:
+
+   - Defines a constructor for the `Student` class to initialize its member variables.
+
+3. **Destructor**:
+
+   - Defines a destructor for the `Student` class to release memory when objects are destroyed. This is called when `delete` is used.
+
+4. **Function `createDynamicStudent()`**:
+
+   - Declares a function named `createDynamicStudent()` that returns a pointer to a `Student` object.
+   - Inside the function, it prompts the user to input `roll`, `cls`, and `gpa`.
+   - Then it dynamically allocates memory for a `Student` object using `new`.
+   - Initializes the `Student` object with the provided attributes.
+   - Returns the pointer to the dynamically allocated `Student` object.
+
+5. **Main Function**:
+   - Calls the `createDynamicStudent()` function, which returns a pointer to a `Student` object.
+   - Stores the returned pointer in the `output` variable.
+   - Prints the attributes (`roll`, `cls`, `gpa`) of the dynamic `Student` object.
+   - Deallocates memory for the dynamic `Student` object using `delete`.
+
+### Key Points
+
+- **Dynamic Object Creation**:
+
+  - Dynamic objects are created using the `new` keyword, which allocates memory from the heap.
+  - Dynamic objects persist until explicitly deallocated using the `delete` keyword.
+  - Dynamic allocation is useful when the size or lifetime of an object cannot be determined at compile time.
+
+- **Memory Management**:
+  - It's essential to release the dynamically allocated memory using `delete` to avoid memory leaks.
+
+### Output Example
+
+If the user enters the following inputs:
+
+```
+101
+10
+3.8
+```
+
+The output will be:
+
+```
+Roll: 101; Class: 10; GPA: 3.8
+Destructor called for roll number 101
+```
+
+This demonstrates how to create and delete dynamic objects in C++.
