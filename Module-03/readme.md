@@ -313,3 +313,103 @@ Output : Name: John Doe, Age: 20, Height: 5.9 feet
 ```
 
 By using the `this` keyword, the code explicitly shows that the member variables of the `mim` object are being set to the values provided by the user through the constructor parameters.
+
+# Return Object from Function
+
+Returning an object from a function in C++ involves creating an object within the function and then returning it to the caller. Here's the explanation using your provided code:
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class Student
+{
+public:
+    int roll;
+    int cls;
+    double gpa;
+
+    Student(int roll, int cls, int gpa)
+    {
+        this->roll = roll;
+        this->cls = cls;
+        this->gpa = gpa;
+    }
+};
+
+// Function to create and return a Student object
+Student func()
+{
+    int roll;
+    int cls;
+    double gpa;
+
+    // Getting input for student attributes
+    cin >> roll >> cls >> gpa;
+
+    // Creating a Student object named bio with the provided attributes
+    Student bio(roll, cls, gpa);
+
+    // Returning the Student object
+    return bio;
+}
+
+int main()
+{
+    // Calling func() to get a Student object
+    Student output = func();
+
+    // Printing the attributes of the returned Student object
+    cout << "Roll: " << output.roll << "; Class: " << output.cls << "; GPA: " << output.gpa << endl;
+    return 0;
+}
+```
+
+### Explanation
+
+1. **Class Definition (Student)**:
+
+   - Defines a class named `Student` with public member variables `roll`, `cls`, and `gpa`.
+
+2. **Constructor**:
+
+   - Defines a constructor for the `Student` class to initialize its member variables.
+
+3. **Function `func()`**:
+
+   - Declares a function named `func()` that returns a `Student` object.
+   - Inside the function, it prompts the user to input `roll`, `cls`, and `gpa`.
+   - Then it creates a `Student` object named `bio` with the provided attributes using the constructor.
+   - Finally, it returns the `bio` object.
+
+4. **Main Function**:
+   - Calls the `func()` function, which returns a `Student` object.
+   - Stores the returned `Student` object in the `output` variable.
+   - Prints the attributes (`roll`, `cls`, `gpa`) of the `output` object.
+
+### Key Points
+
+- **Return Object from Function**:
+
+  - The function `func()` returns a `Student` object.
+  - Inside the function, a `Student` object named `bio` is created and initialized with user-provided attributes.
+  - This `bio` object is then returned from the function.
+
+- **Usage**:
+  - Returning objects from functions can be useful when you want to encapsulate certain operations or calculations within a function and then return the result as an object.
+
+### Output Example
+
+If the user enters the following inputs:
+
+```
+101 10 3.8
+```
+
+The output will be:
+
+```
+Roll: 101; Class: 10; GPA: 3.8
+```
+
+This demonstrates how an object is created within a function, initialized, and then returned to the caller for further use.
