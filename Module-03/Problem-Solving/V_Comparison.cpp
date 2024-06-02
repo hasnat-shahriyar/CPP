@@ -19,7 +19,7 @@ int main()
     }
     else if (s == '=')
     {
-        result = (a = b);
+        result = (a == b);
     }
 
     if (result)
