@@ -16,7 +16,7 @@ Welcome to Introduction to C++ for DSA repository. Here, you'll find detailed ex
 
 ### Module - 04
 
-- [String Class in C++]()
+- [String Class in C++](https://github.com/hasnat-shahriyar/CPP/tree/main/Module-04)
 
 #
 
