@@ -6,8 +6,8 @@ void print(stringstream &ss)
     string word;
     if (ss >> word)
     {
-        cout << word << endl;
         print(ss);
+        cout << word << endl;
     }
 }
 int main()
