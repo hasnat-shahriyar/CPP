@@ -346,3 +346,188 @@ Let's explain the sorting process using the Selection Sort algorithm visually.
 ### Summary:
 
 Selection Sort repeatedly selects the minimum (or maximum) element from the unsorted part of the array and moves it to the beginning (or end). This process continues until the array is sorted. Each pass through the array selects the next element to be placed in its correct position.
+
+# Counting Sort
+
+### Code Explanation:
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    string s;
+    cin >> s;
+
+    int frq[26] = {0};
+
+    for (char c : s)
+    {
+        frq[c - 'a']++;
+    }
+
+    for (char i = 'a'; i <= 'z'; i++)
+    {
+        for (int j = 0; j < frq[i - 'a']; j++)
+        {
+            cout << i;
+        }
+    }
+    return 0;
+}
+```
+
+#### Step-by-Step Explanation:
+
+1. **Include Necessary Headers:**
+
+   ```cpp
+   #include <bits/stdc++.h>
+   using namespace std;
+   ```
+
+   This includes all the standard library headers. `using namespace std;` allows us to avoid prefixing standard library names with `std::`.
+
+2. **Main Function:**
+
+   ```cpp
+   int main()
+   {
+       string s;
+       cin >> s;
+   ```
+
+   - Declare a string variable `s`.
+   - Read input into `s`.
+
+3. **Frequency Array Initialization:**
+
+   ```cpp
+   int frq[26] = {0};
+   ```
+
+   - Declare an array `frq` of size 26, initialized to 0. This array will store the frequency of each letter in the string.
+
+4. **Count Frequencies:**
+
+   ```cpp
+   for (char c : s)
+   {
+       frq[c - 'a']++;
+   }
+   ```
+
+   - Iterate over each character `c` in the string `s`.
+   - Increment the corresponding element in the `frq` array. `c - 'a'` converts the character to an index (0 for 'a', 1 for 'b', ..., 25 for 'z').
+
+5. **Output Sorted Characters:**
+
+   ```cpp
+   for (char i = 'a'; i <= 'z'; i++)
+   {
+       for (int j = 0; j < frq[i - 'a']; j++)
+       {
+           cout << i;
+       }
+   }
+   ```
+
+   - Iterate over each letter from 'a' to 'z'.
+   - For each letter, print it `frq[i - 'a']` times, where `i - 'a'` gives the index corresponding to the letter in the `frq` array.
+
+6. **Return Statement:**
+   ```cpp
+   return 0;
+   }
+   ```
+   - End the main function and return 0.
+
+### Visual Explanation:
+
+Let's consider the input string `"examples"`.
+
+1. **Input:**
+
+   ```
+   s = "examples"
+   ```
+
+2. **Initialize Frequency Array:**
+
+   ```
+   frq = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+   ```
+
+3. **Count Frequencies:**
+
+   - For `c = 'e'`, `frq['e' - 'a']++` → `frq[4]++` → `frq[4] = 1`
+   - For `c = 'x'`, `frq['x' - 'a']++` → `frq[23]++` → `frq[23] = 1`
+   - For `c = 'a'`, `frq['a' - 'a']++` → `frq[0]++` → `frq[0] = 1`
+   - For `c = 'm'`, `frq['m' - 'a']++` → `frq[12]++` → `frq[12] = 1`
+   - For `c = 'p'`, `frq['p' - 'a']++` → `frq[15]++` → `frq[15] = 1`
+   - For `c = 'l'`, `frq['l' - 'a']++` → `frq[11]++` → `frq[11] = 1`
+   - For `c = 'e'`, `frq['e' - 'a']++` → `frq[4]++` → `frq[4] = 2`
+   - For `c = 's'`, `frq['s' - 'a']++` → `frq[18]++` → `frq[18] = 1`
+
+   Updated `frq` array:
+
+   ```
+   frq = [1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
+   ```
+
+4. **Output Sorted Characters:**
+
+   - For `i = 'a'` (`frq[0] = 1`): output `'a'`
+   - For `i = 'e'` (`frq[4] = 2`): output `'ee'`
+   - For `i = 'l'` (`frq[11] = 1`): output `'l'`
+   - For `i = 'm'` (`frq[12] = 1`): output `'m'`
+   - For `i = 'p'` (`frq[15] = 1`): output `'p'`
+   - For `i = 's'` (`frq[18] = 1`): output `'s'`
+   - For `i = 'x'` (`frq[23] = 1`): output `'x'`
+
+   Final output:
+
+   ```
+   aeeelmpsx
+   ```
+
+### Visual Method:
+
+**Input String:**
+
+```
+examples
+```
+
+**Frequency Array (Initial State):**
+
+```
+a: 0, b: 0, c: 0, d: 0, e: 0, f: 0, g: 0, h: 0, i: 0, j: 0, k: 0, l: 0, m: 0, n: 0, o: 0, p: 0, q: 0, r: 0, s: 0, t: 0, u: 0, v: 0, w: 0, x: 0, y: 0, z: 0
+```
+
+**After Counting Frequencies:**
+
+```
+a: 1, b: 0, c: 0, d: 0, e: 2, f: 0, g: 0, h: 0, i: 0, j: 0, k: 0, l: 1, m: 1, n: 0, o: 0, p: 1, q: 0, r: 0, s: 1, t: 0, u: 0, v: 0, w: 0, x: 1, y: 0, z: 0
+```
+
+**Output Sorted Characters:**
+
+```
+a: 1 → a
+e: 2 → ee
+l: 1 → l
+m: 1 → m
+p: 1 → p
+s: 1 → s
+x: 1 → x
+```
+
+**Final Output:**
+
+```
+aeeelmpsx
+```
+
+This visualization helps in understanding how the frequency array is used to construct the sorted output by iterating over each character from 'a' to 'z' and printing them according to their frequencies.
