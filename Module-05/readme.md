@@ -183,3 +183,166 @@ Name: Alice Age: 20 CGPA: 9.3
 This visualizes how the program finds the students with the lowest and highest marks by iterating through the array and comparing the `marks` attribute of each `Student` object.
 
 # Sort Array of Objects using Selection Sort
+
+Certainly! Let's walk through the provided code step by step, explaining how Selection Sort is implemented to sort an array of `Student` objects based on their marks.
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class Student
+{
+public:
+    string name;
+    int roll;
+    double marks;
+};
+
+int main()
+{
+    int n;
+    cin >> n;
+
+    Student *a = new Student[n];
+
+    for (int i = 0; i < n; i++)
+    {
+        cin.ignore();
+        getline(cin, a[i].name);
+        cin >> a[i].roll >> a[i].marks;
+    }
+
+    // Sorting from low to high marks
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = 0; j < n - i - 1; j++)
+        {
+            if (a[j].marks > a[j + 1].marks)
+            {
+                // Swapping
+                swap(a[j], a[j + 1]);
+            }
+        }
+    }
+
+    cout << "Sorted by CGPA (low to high):" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << "Name: " << a[i].name << " Roll: " << a[i].roll << " CGPA: " << a[i].marks << endl;
+    }
+
+    // Sorting from high to low marks
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = 0; j < n - i - 1; j++)
+        {
+            if (a[j].marks < a[j + 1].marks)
+            {
+                // Swapping
+                swap(a[j], a[j + 1]);
+            }
+        }
+    }
+
+    cout << "Sorted by CGPA (high to low):" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << "Name: " << a[i].name << " Roll: " << a[i].roll << " CGPA: " << a[i].marks << endl;
+    }
+
+    delete[] a;
+    return 0;
+}
+```
+
+### Explanation:
+
+1. **Input:**
+
+   - Read the number of students (`n`).
+   - Dynamically allocate memory for an array of `Student` objects.
+
+2. **Input Student Information:**
+
+   - Iterate `n` times to input details for each student: name, roll, and marks.
+
+3. **Sorting from low to high marks:**
+
+   - This part of the code sorts the array of students in ascending order of marks.
+   - It uses a nested loop to iterate over each element in the array.
+   - The outer loop (`i`) controls the number of passes through the array.
+   - The inner loop (`j`) iterates from 0 to `n - i - 1` for each pass.
+   - Within the inner loop, if the marks of the current student (`a[j]`) are greater than the marks of the next student (`a[j + 1]`), it swaps their positions using the `swap` function.
+   - This process continues until the array is sorted in ascending order of marks.
+
+4. **Output Sorted Array (low to high):**
+
+   - After sorting, it outputs the sorted array of students in ascending order of marks.
+
+5. **Sorting from high to low marks:**
+
+   - This part of the code sorts the array of students in descending order of marks.
+   - It follows a similar approach to sorting in ascending order but checks if the marks of the current student are less than the marks of the next student to swap their positions.
+   - This process continues until the array is sorted in descending order of marks.
+
+6. **Output Sorted Array (high to low):**
+
+   - Finally, it outputs the sorted array of students in descending order of marks.
+
+7. **Memory Cleanup:**
+   - Deletes the dynamically allocated memory to prevent memory leaks.
+
+This code implements Selection Sort to sort an array of `Student` objects based on their marks in both ascending and descending order.
+
+Let's explain the sorting process using the Selection Sort algorithm visually.
+
+### Visual Explanation of Selection Sort:
+
+**Given array of objects (students):**
+
+```
+[
+  {name: "John", roll: 101, marks: 3.5},
+  {name: "Alice", roll: 102, marks: 4.0},
+  {name: "Bob", roll: 103, marks: 3.2},
+  {name: "Emily", roll: 104, marks: 3.8}
+]
+```
+
+1. **Sorting from low to high marks:**
+
+   **Pass 1:**  
+   Start with the first student. Assume it has the lowest marks initially.  
+   Compare its marks with all other students.  
+   If we find a student with lower marks, swap their positions.  
+   After the first pass, the student with the lowest marks will be at index 0.
+
+   **Visualization:**  
+   ![Selection Sort Pass 1](https://i.imgur.com/WUV2yLt.png)
+
+   **Pass 2:**  
+   Move to the next student (at index 1) and repeat the process.  
+   Find the student with the lowest marks among the remaining students.  
+   Swap positions if necessary.
+
+   **Visualization:**  
+   ![Selection Sort Pass 2](https://i.imgur.com/Jz3VGms.png)
+
+   **Pass 3:**  
+   Repeat the process for the remaining students until the second-last student.  
+   At the end of this pass, the array will be sorted in ascending order of marks.
+
+2. **Sorting from high to low marks:**
+
+   After sorting in ascending order, we'll sort in descending order.
+
+   **Visualization:**  
+   It's essentially the same process as sorting in ascending order, but this time we look for the highest marks and swap accordingly.
+
+   ![Selection Sort Descending](https://i.imgur.com/gdjnwDk.png)
+
+   At the end of this process, the array will be sorted both in ascending and descending order of marks.
+
+### Summary:
+
+Selection Sort repeatedly selects the minimum (or maximum) element from the unsorted part of the array and moves it to the beginning (or end). This process continues until the array is sorted. Each pass through the array selects the next element to be placed in its correct position.
